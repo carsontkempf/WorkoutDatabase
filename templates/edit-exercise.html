@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('exercise_list') }}">Exercise List</a></li>
+                <li><a href="{{ url_for('workout_list') }}">Workout List</a></li>
+                <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="form-container">
+        <h1>Edit Exercise</h1>
+        <form action="{{ url_for('edit_exercise', exercise_id=exercise.exercise_id) }}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ exercise.name }}" required>
+
+            <label for="muscle_group">Muscle Group:</label>
+            <select id="muscle_group" name="muscle_group" required>
+                <option value="Chest" {% if exercise.muscle_group == 'Chest' %} selected {% endif %}>Chest</option>
+                <option value="Back" {% if exercise.muscle_group == 'Back' %} selected {% endif %}>Back</option>
+                <option value="Shoulders" {% if exercise.muscle_group == 'Shoulders' %} selected {% endif %}>Shoulders</option>
+                <option value="Arms" {% if exercise.muscle_group == 'Arms' %} selected {% endif %}>Arms</option>
+                <option value="Abdominals" {% if exercise.muscle_group == 'Abdominals' %} selected {% endif %}>Abdominals</option>
+                <option value="Lower Back" {% if exercise.muscle_group == 'Lower Back' %} selected {% endif %}>Lower Back</option>
+                <option value="Hips" {% if exercise.muscle_group == 'Hips' %} selected {% endif %}>Hips</option>
+                <option value="Thighs" {% if exercise.muscle_group == 'Thighs' %} selected {% endif %}>Thighs</option>
+                <option value="Legs" {% if exercise.muscle_group == 'Legs' %} selected {% endif %}>Legs</option>
+                <option value="Adductors and Abductors" {% if exercise.muscle_group == 'Adductors and Abductors' %} selected {% endif %}>Adductors and Abductors</option>
+            </select>
+
+            <label for="intensity">Intensity:</label>
+            <select id="intensity" name="intensity" required>
+                <option value="Light" {% if exercise.intensity == 'Light' %} selected {% endif %}>Light</option>
+                <option value="Moderate" {% if exercise.intensity == 'Moderate' %} selected {% endif %}>Moderate</option>
+                <option value="Vigorous" {% if exercise.intensity == 'Vigorous' %} selected {% endif %}>Vigorous</option>
+            </select>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required>{{ exercise.description }}</textarea>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

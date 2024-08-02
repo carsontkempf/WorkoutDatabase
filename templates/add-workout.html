@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Workout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='add-workout.js') }}"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('exercise_list') }}">Exercise List</a></li>
+                <li><a href="{{ url_for('workout_list') }}">Workout List</a></li>
+                <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form id="workout-form" action="{{ url_for('submit_workout') }}" method="POST">
+
+    <div class="form-container">
+        <h1>Add Workout</h1>
+        <label for="name">Workout Name:</label>
+        <input type="text" id="name" name="name" value="{{ workout.name }}" required>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">{{ workout.description }}</textarea>
+
+        <label for="intensity">Intensity:</label>
+        <select id="intensity" name="intensity" required>
+            <option value="Light" {% if workout.intensity == 'Light' %} selected {% endif %}>Light</option>
+            <option value="Moderate" {% if workout.intensity == 'Moderate' %} selected {% endif %}>Moderate</option>
+            <option value="Vigorous" {% if workout.intensity == 'Vigorous' %} selected {% endif %}>Vigorous</option>
+        </select>
+
+        <label for="focus">Focus:</label>
+        <select id="focus" name="focus" required>
+            <option value="Strength Training" {% if workout.focus == 'Strength Training' %} selected {% endif %}>Strength Training</option>
+            <option value="Cardiovascular Health" {% if workout.focus == 'Cardiovascular Health' %} selected {% endif %}>Cardiovascular Health</option>
+            <option value="Weight Loss" {% if workout.focus == 'Weight Loss' %} selected {% endif %}>Weight Loss</option>
+            <option value="Flexibility" {% if workout.focus == 'Flexibility' %} selected {% endif %}>Flexibility</option>
+            <option value="Balance and Coordination" {% if workout.focus == 'Balance and Coordination' %} selected {% endif %}>Balance and Coordination</option>
+            <option value="Endurance Training" {% if workout.focus == 'Endurance Training' %} selected {% endif %}>Endurance Training</option>
+            <option value="High-Intensity Interval Training (HIIT)" {% if workout.focus == 'High-Intensity Interval Training (HIIT)' %} selected {% endif %}>High-Intensity Interval Training (HIIT)</option>
+            <option value="Muscle Toning" {% if workout.focus == 'Muscle Toning' %} selected {% endif %}>Muscle Toning</option>
+            <option value="Core Strengthening" {% if workout.focus == 'Core Strengthening' %} selected {% endif %}>Core Strengthening</option>
+            <option value="Functional Fitness" {% if workout.focus == 'Functional Fitness' %} selected {% endif %}>Functional Fitness</option>
+            <option value="Rehabilitation and Recovery" {% if workout.focus == 'Rehabilitation and Recovery' %} selected {% endif %}>Rehabilitation and Recovery</option>
+            <option value="Sports Specific Training" {% if workout.focus == 'Sports Specific Training' %} selected {% endif %}>Sports Specific Training</option>
+            <option value="Bodybuilding" {% if workout.focus == 'Bodybuilding' %} selected {% endif %}>Bodybuilding</option>
+            <option value="Circuit Training" {% if workout.focus == 'Circuit Training' %} selected {% endif %}>Circuit Training</option>
+            <option value="Mind-Body Wellness" {% if workout.focus == 'Mind-Body Wellness' %} selected {% endif %}>Mind-Body Wellness</option>
+        </select>
+
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="10" value="{{ workout.rating }}" required>
+
+        <div id="existing-exercise-container">
+            {% if exercises %}
+            <h2>Exercises in Workout</h2>
+            <ul>
+            {% for exercise in exercises %}
+                <li>{{ exercise.name }} - {{ exercise.intensity }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div id="exercises-container"></div>
+
+<button id="select-exercise-button" type="button">Select Exercise</button>
+<button type="submit">Create/Update Workout</button>
+    </div>
+    </form>
+</body>
+</html>

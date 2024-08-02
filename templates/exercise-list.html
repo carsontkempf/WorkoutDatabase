@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise List</title>
+    <link rel="stylesheet" href="../static/styles.css"> <!-- Adjusted path to CSS file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/script.js"></script> <!-- Adjusted path to JavaScript file -->
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('exercise_list') }}">Exercise List</a></li>
+                <li><a href="{{ url_for('workout_list') }}">Workout List</a></li>
+                <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <select class="filter-dropdown" id="filterDropdown">
+        <option value="">Filter By:</option>
+        <option value="rating_high_low">Rating (High to Low)</option>
+        <optgroup label="Intensity">
+            <option value="intensity_light">Light</option>
+            <option value="intensity_moderate">Moderate</option>
+            <option value="intensity_vigorous">Vigorous</option>
+        </optgroup>
+        <optgroup label="Muscle Groups">
+            <option value="muscle_chest">Chest</option>
+            <option value="muscle_back">Back</option>
+            <option value="muscle_shoulders">Shoulders</option>
+            <option value="muscle_arms">Arms</option>
+            <option value="muscle_abdominals">Abdominals</option>
+            <option value="muscle_lower_back">Lower Back</option>
+            <option value="muscle_hips">Hips</option>
+            <option value="muscle_thighs">Thighs</option>
+            <option value="muscle_legs">Legs</option>
+            <option value="muscle_adductors_abductors">Adductors and Abductors</option>
+        </optgroup>
+    </select>
+    
+    <!-- Add Exercise Button -->
+    <a href="{{ url_for('add_exercise') }}" class="btn" id="add-exercise-btn">ADD EXERCISE</a>
+    <h1>Exercises</h1>
+    <div id="exercises-container"></div> <!-- Container for exercises -->
+</body>
+</html>

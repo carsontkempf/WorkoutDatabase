@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Exercise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='select-exercise.js') }}"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('exercise_list') }}">Exercise List</a></li>
+                <li><a href="{{ url_for('workout_list') }}">Workout List</a></li>
+                <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Select Exercises</h1>
+    <button id="done-button" class="done-button">Done</button>
+    <div id="exercises-container" class="exercises-container">
+        {% for exercise in exercises %}
+            <div class="exercise-container">
+                <form class="exercise-form" data-exercise-id="{{ exercise.exercise_id }}">
+                    <input type="checkbox" name="exercise-checkbox" id="exercise-{{ exercise.exercise_id }}" value="{{ exercise.exercise_id }}">
+                    <label for="exercise-{{ exercise.exercise_id }}">{{ exercise.name }} - {{ exercise.description }}</label>
+                    <div class="exercise-detail" style="display: none;">
+                        <label for="equipment-needed-{{ exercise.exercise_id }}">Equipment Needed:</label>
+                        <input type="text" name="equipment-needed" id="equipment-needed-{{ exercise.exercise_id }}" required>
+                        <label for="weight-{{ exercise.exercise_id }}">Weight (in kg):</label>
+                        <input type="number" name="weight" id="weight-{{ exercise.exercise_id }}" min="0" required>
+                        <label for="intensity-{{ exercise.exercise_id }}">Intensity:</label>
+                        <select name="intensity" id="intensity-{{ exercise.exercise_id }}" required>
+                            <option value="Light">Light</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Vigorous">Vigorous</option>
+                        </select>
+                        <label for="rating-{{ exercise.exercise_id }}">Rating (1-10):</label>
+                        <input type="number" name="rating" id="rating-{{ exercise.exercise_id }}" min="1" max="10" required>
+                        <label for="sets-{{ exercise.exercise_id }}">Sets:</label>
+                        <input type="number" name="sets" id="sets-{{ exercise.exercise_id }}" min="0" required>
+                        <label for="reps-{{ exercise.exercise_id }}">Reps:</label>
+                        <input type="number" name="reps" id="reps-{{ exercise.exercise_id }}" min="0" required>
+                    </div>
+                    <button type="button" class="show-detail-button">Add Detail</button>
+                    <button type="submit" class="add-detail-button" style="display: none;">Add Exercise</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

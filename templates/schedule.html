@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="../static/styles.css"> <!-- Ensure the path to the CSS is correct -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js"></script> <!-- Added Day.js CDN -->
+    <script src="{{ url_for('static', filename='schedule.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('exercise_list') }}">Exercise List</a></li>
+                <li><a href="{{ url_for('workout_list') }}">Workout List</a></li>
+                <li><a href="{{ url_for('schedule') }}">Schedule</a></li>
+            </ul>
+        </nav>        
+    </header>
+    <div class="schedule-page-container">
+        <div class="center">
+            <div class="schedule-table-container">
+                <table id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Schedule table rows will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="scheduleContainer" class="schedule-container">
+                <!-- Schedule details will be displayed here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
